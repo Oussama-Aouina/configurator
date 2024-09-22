@@ -1,101 +1,234 @@
+"use client";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+} from "@chakra-ui/react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [bad, setBad] = useState({
+    Hintergrund: "/images/Bad/Hintergrund_Grundausstattung.png",
+    Toilette: "/images/Bad/Toilette_Grundausstattung.png",
+    WB_Armatur: "/images/Bad/WB_Armatur_Sonderausstattung.png",
+    WB: "/images/Bad/WB_Grundausstattung.png",
+    Druckplatte: "/images/Bad/Druckplatte_Sonderausstattung.png",
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const items = [
+    {
+      name: "Hintergrund",
+      options: [
+        {
+          name: "Grundausstattung",
+          desc: "desc1",
+          icon: "/icons/icon2.jpg",
+          img: "/images/Bad/Hintergrund_Grundausstattung.png",
+        },
+        {
+          name: "Sonderausstattung",
+          desc: "desc1",
+          icon: "/icons/icon.jpg",
+          img: "/images/Bad/Hintergrund_Sonderausstattung.png",
+        },
+      ],
+    },
+    {
+      name: "Toilette",
+      options: [
+        {
+          name: "Grundausstattung",
+          desc: "desc1",
+          icon: "/icons/toilette.jpg",
+          img: "/images/Bad/Toilette_Grundausstattung.png",
+        },
+        {
+          name: "Sonderausstattung",
+          desc: "desc1",
+          icon: "/icons/toilette.jpg",
+          img: "/images/Bad/Toilette_Sonderausstattung.png",
+        },
+      ],
+    },
+    {
+      name: "WB_Armatur",
+      options: [
+        {
+          name: "Grundausstattung",
+          desc: "desc1",
+          icon: "/icons/wcplate.png",
+          img: "/images/Bad/WB_Armatur_Grundausstattung.png",
+        },
+        {
+          name: "Sonderausstattung",
+          desc: "desc1",
+          icon: "/icons/wcplate.png",
+          img: "/images/Bad/WB_Armatur_Sonderausstattung.png",
+        },
+      ],
+    },
+    {
+      name: "WB",
+      options: [
+        {
+          name: "Grundausstattung",
+          desc: "desc1",
+          icon: "/icons/icon2.jpg",
+          img: "/images/Bad/WB_Grundausstattung.png",
+        },
+        {
+          name: "Sonderausstattung",
+          desc: "desc1",
+          icon: "/icons/icon.jpg",
+          img: "/images/Bad/WB_Sonderausstattung.png",
+        },
+      ],
+    },
+    {
+      name: "Druckplatte",
+      options: [
+        {
+          name: "Grundausstattung",
+          desc: "desc1",
+          icon: "/icons/wcplate.png",
+          img: "/images/Bad/Druckplatte_Grundausstattung.png",
+        },
+        {
+          name: "Sonderausstattung",
+          desc: "desc1",
+          icon: "/icons/wcplate.png",
+          img: "/images/Bad/Druckplatte_Sonderausstattung.png",
+        },
+      ],
+    },
+  ];
+
+  function changeImage(name, img) {
+    setBad({
+      ...bad,
+      [name]: img,
+    });
+    console.log(bad);
+  }
+
+  return (
+    <div className="">
+      <div className="h-screen w-screen">
+        <div className="flex h-full w-full">
+          <div className="flex w-full flex-col">
+            <div className="flex h-20 w-full items-center justify-center bg-slate-300">
+              <h1 className="text-2xl font-bold">Preview</h1>
+            </div>
+            <div className="relative h-[90%] w-full">
+              {/* Hintergrund */}
+              <Image
+                src={bad.Hintergrund}
+                alt="sdf"
+                fill
+                className="object-contain lg:object-cover"
+                quality={100}
+              />
+              {/* Toilette */}
+              <Image
+                src={bad.Toilette}
+                alt="sdf"
+                fill
+                className="object-contain lg:object-cover"
+                quality={100}
+              />
+              {/* WB_Armatur */}
+              <Image
+                src={bad.WB_Armatur}
+                alt="sdf"
+                fill
+                className="object-contain lg:object-cover"
+                quality={100}
+              />
+              {/* WB */}
+              <Image
+                src={bad.WB}
+                alt="sdf"
+                fill
+                className="object-contain lg:object-cover"
+                quality={100}
+              />
+              {/* Druckplatte */}
+              <Image
+                src={bad.Druckplatte}
+                alt="sdf"
+                fill
+                className="object-contain lg:object-cover"
+                quality={100}
+              />
+            </div>
+          </div>
+          <div className="flex w-[340px] flex-col bg-slate-200">
+            <div className="flex h-20 w-full items-center justify-center bg-slate-200">
+              <h1 className="text-2xl">Menu</h1>
+            </div>
+            <div className="flex h-full w-full flex-col items-stretch justify-start bg-slate-200 text-lg shadow-lg">
+              <Accordion defaultIndex={[0]} allowMultiple>
+                {items.map((item, index) => {
+                  return (
+                    <AccordionItem
+                      key={index}
+                      borderTop="1px solid"
+                      borderBottom="1px solid"
+                      borderColor="gray.500"
+                    >
+                      <h2>
+                        <AccordionButton
+                          w="100%"
+                          _expanded={{ bg: "gray.300" }}
+                        >
+                          <Box
+                            as="span"
+                            flex="1"
+                            width={"100%"}
+                            justifyContent={"space-between"}
+                            textAlign="left"
+                          >
+                            {item.name}
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel p={0} w="100%">
+                        <ul className="flex w-full flex-col items-center border">
+                          {item.options.map((option, index) => {
+                            return (
+                              <li
+                                onClick={() =>
+                                  changeImage(item.name, option.img)
+                                }
+                                key={index}
+                                className="flex w-full cursor-pointer items-start justify-start gap-6 p-3 hover:bg-slate-300"
+                              >
+                                <Image
+                                  src={option.icon}
+                                  alt={option.name}
+                                  width={40}
+                                  height={40}
+                                />
+                                <p>{option.name}</p>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </AccordionPanel>
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      ;
     </div>
   );
 }
